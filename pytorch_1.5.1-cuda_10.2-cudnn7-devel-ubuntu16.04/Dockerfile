@@ -37,7 +37,7 @@ RUN curl -sLo ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-late
 
 # CUDA 10.1-specific steps
 RUN conda install -y -c pytorch \
-    cudatoolkit=10.1 \
+    cudatoolkit=10.2 \
     pytorch=1.5.1 \
     torchvision \
  && conda clean -ya
