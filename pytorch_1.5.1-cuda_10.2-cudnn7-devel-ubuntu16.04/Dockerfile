@@ -14,6 +14,10 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir /app
 WORKDIR /app
 
+# Make cure /mnt is accessible
+RUN mkdir /mnt \
+ && chmod 777 /mnt
+
 # Create a non-root user and switch to it
 RUN adduser --disabled-password --gecos '' --shell /bin/bash user \
  && chown -R user:user /app
