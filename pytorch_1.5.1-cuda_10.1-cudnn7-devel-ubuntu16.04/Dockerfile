@@ -38,17 +38,17 @@ RUN curl -sLo ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-late
 RUN conda install -y -c pytorch \
     cudatoolkit=10.1 \
     pytorch=1.5.1 \
-    torchvision
+    torchvision \
  && conda clean -ya
-
-# Set the default command to python3
-CMD ["python3"]
 
 RUN git clone https://github.com/nvidia/apex /apex \
   && cd /apex \
   && pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
 WORKDIR /workspace
 rm -rf apex
+
+# Set the default command to python3
+CMD ["python3"]
 
 WORKDIR /workspace
 RUN chmod -R a+w .
