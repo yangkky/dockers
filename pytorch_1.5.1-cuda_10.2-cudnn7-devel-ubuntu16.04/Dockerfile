@@ -10,8 +10,22 @@ RUN apt-get update && apt-get install -y \
     libx11-6 \
  && rm -rf /var/lib/apt/lists/*
 
-# Make cure /mnt is accessible
+# Create a working directory
+RUN mkdir /app
+WORKDIR /app
+
+# Make sure /mnt is accessible
 RUN chmod 777 /mnt
+
+# Create a non-root user and switch to it
+RUN adduser --disabled-password --gecos '' --shell /bin/bash user \
+ && chown -R user:user /app
+RUN echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-user
+USER user
+
+# All users can use /home/user as their home directory
+ENV HOME=/home/user
+RUN chmod 777 /home/user
 
 # Install Miniconda and Python 3.7
 ENV CONDA_AUTO_UPDATE_CONDA=false
@@ -33,9 +47,9 @@ RUN conda install -y -c pytorch \
 
 RUN git clone https://github.com/nvidia/apex \
   && cd apex \
-  && pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" . \
-  && cd .. \
-  && rm -rf apex
+  && pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
+WORKDIR /app
+RUN rm -rf apex
 
 # Set the default command to python3
 CMD ["python3"]
