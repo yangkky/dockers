@@ -31,8 +31,9 @@ RUN curl -sLo ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-late
  && chmod +x ~/miniconda.sh \
  && ~/miniconda.sh -b -p ~/miniconda \
  && rm ~/miniconda.sh \
- && conda install -y python==3.7 numpy pyyaml scipy pandas h5py mkl mkl-include ninja cython ipython typing mlflow \
- && conda clean -ya
+ && conda install -y python==3.7 numpy pyyaml scipy pandas h5py mkl mkl-include ninja cython ipython typing \
+ && conda clean -ya \
+ && pip install mlflow
 
 # CUDA 10.1-specific steps
 RUN conda install -y -c pytorch \
