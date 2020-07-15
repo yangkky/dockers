@@ -42,14 +42,11 @@ RUN conda install -y -c pytorch \
     torchvision \
  && conda clean -ya
 
-RUN git clone https://github.com/nvidia/apex /apex \
-  && cd /apex \
+RUN git clone https://github.com/nvidia/apex \
+  && cd apex \
   && pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
-WORKDIR /workspace
+WORKDIR /app
 RUN rm -rf apex
 
 # Set the default command to python3
 CMD ["python3"]
-
-WORKDIR /workspace
-RUN chmod -R a+w .
