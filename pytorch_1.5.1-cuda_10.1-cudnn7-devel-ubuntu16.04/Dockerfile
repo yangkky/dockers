@@ -45,7 +45,7 @@ RUN git clone https://github.com/nvidia/apex /apex \
   && cd /apex \
   && pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
 WORKDIR /workspace
-rm -rf apex
+RUN rm -rf apex
 
 # Set the default command to python3
 CMD ["python3"]
