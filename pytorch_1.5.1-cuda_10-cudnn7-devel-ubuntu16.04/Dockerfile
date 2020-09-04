@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:10-cudnn7-devel-ubuntu16.04
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
@@ -38,7 +38,7 @@ RUN curl -sLo ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-late
  && conda clean -ya \
  && pip install mlflow
 
-# CUDA 10.1-specific steps
+# CUDA 10.x-specific steps
 RUN conda install -y -c pytorch \
     cudatoolkit=10 \
     pytorch=1.5.1 \
