@@ -45,6 +45,8 @@ RUN conda install -y -c pytorch \
     torchvision \
  && conda clean -ya
 
+RUN conda install -c conda-forge -c bioconda hhsuite
+RUN pip install wget
 RUN git clone https://github.com/nvidia/apex \
   && cd apex \
   && pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
