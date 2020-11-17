@@ -37,6 +37,7 @@ RUN curl -sLo ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-late
  && conda install -y python==3.7 numpy pyyaml scipy pandas h5py mkl mkl-include ninja cython ipython typing \
  && conda clean -ya \
  && pip install mlflow \
+ && rm -rf ~/miniconda3/lib/python3.7/site-packages/ruamel*
  && pip install ruamel.yaml==0.16
 
 # CUDA 10.1-specific steps
